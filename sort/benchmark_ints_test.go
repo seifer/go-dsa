@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/seifer/go-dsa/sort/insertionsort"
+	"github.com/seifer/go-dsa/sort/quicksort"
 	"github.com/seifer/go-dsa/sort/selectionsort"
 )
 
@@ -47,6 +48,19 @@ func BenchmarkInt1KInsertionSort(b *testing.B) {
 	}
 }
 
+func BenchmarkInt1KQuickSort(b *testing.B) {
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		data := make([]int, 1<<10)
+		for i := 0; i < len(data); i++ {
+			data[i] = i ^ 0x2cc
+		}
+		b.StartTimer()
+		quicksort.Ints(data)
+		b.StopTimer()
+	}
+}
+
 func BenchmarkInt64KStdSort(b *testing.B) {
 	b.StopTimer()
 	for i := 0; i < b.N; i++ {
@@ -82,6 +96,19 @@ func BenchmarkInt64KInsertionSort(b *testing.B) {
 		}
 		b.StartTimer()
 		insertionsort.Ints(data)
+		b.StopTimer()
+	}
+}
+
+func BenchmarkInt64KQuickSort(b *testing.B) {
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		data := make([]int, 1<<16)
+		for i := 0; i < len(data); i++ {
+			data[i] = i ^ 0xcccc
+		}
+		b.StartTimer()
+		quicksort.Ints(data)
 		b.StopTimer()
 	}
 }
