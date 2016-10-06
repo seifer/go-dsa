@@ -25,36 +25,32 @@ func Ints(in []int) {
 		return
 	}
 
-	pivotI := rnd.Intn(len(in))
-	pivotV := in[pivotI]
+	pivotV := in[rnd.Intn(len(in))]
+	// TODO need to make test with corner cases.
+	// In common case, median work better than rand.
+	// pivotV := (in[0] + in[len(in)/2] + in[len(in)-1]) / 3
 
 	i := 0
 	j := len(in) - 1
 
 	for i < j {
-		if in[i] >= pivotV && in[j] <= pivotV {
-			in[i], in[j] = in[j], in[i]
-
-			if i == pivotI {
-				pivotI = j
-			} else if j == pivotI {
-				pivotI = i
-			}
+		for in[i] < pivotV {
+			i++
 		}
 
-		if in[i] < pivotV {
-			if i < pivotI {
-				i++
-			}
+		for in[j] > pivotV {
+			j--
 		}
 
-		if in[j] >= pivotV {
-			if j > pivotI {
-				j--
-			}
+		in[i], in[j] = in[j], in[i]
+
+		if in[i] == pivotV {
+			j--
+		} else if in[j] == pivotV {
+			i++
 		}
 	}
 
-	Ints(in[:pivotI])
-	Ints(in[pivotI+1:])
+	Ints(in[:i])
+	Ints(in[i+1:])
 }
