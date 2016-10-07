@@ -2,15 +2,15 @@ package insertionsort
 
 // Ints sorting slice of ints
 func Ints(in []int) {
-	var i, key int
+	var j, key int
 
-	for j := 1; j < len(in); j++ {
-		key = in[j]
+	for i := 1; i < len(in); i++ {
+		key = in[i]
 
-		for i = j - 1; i >= 0 && in[i] > key; i-- {
-			in[i+1] = in[i]
+		for j = i - 1; j >= 0 && in[j] > key; j-- {
+			in[j+1] = in[j]
 		}
 
-		in[i+1] = key
+		in[j+1] = key
 	}
 }
