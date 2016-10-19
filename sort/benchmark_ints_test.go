@@ -4,11 +4,13 @@ import (
 	"sort"
 	"testing"
 
+	"github.com/seifer/go-dsa/sort/heapsort"
 	"github.com/seifer/go-dsa/sort/insertionsort"
 	"github.com/seifer/go-dsa/sort/mergesort"
 	"github.com/seifer/go-dsa/sort/quicksort"
 	"github.com/seifer/go-dsa/sort/selectionsort"
 	"github.com/seifer/go-dsa/sort/shellsort"
+	"github.com/seifer/go-dsa/sort/timsort"
 )
 
 func BenchmarkInt1KStdSort(b *testing.B) {
@@ -89,6 +91,32 @@ func BenchmarkInt1KMergeSort(b *testing.B) {
 	}
 }
 
+func BenchmarkInt1KHeapSort(b *testing.B) {
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		data := make([]int, 1<<10)
+		for i := 0; i < len(data); i++ {
+			data[i] = i ^ 0x2cc
+		}
+		b.StartTimer()
+		heapsort.Ints(data)
+		b.StopTimer()
+	}
+}
+
+func BenchmarkInt1KTimSort(b *testing.B) {
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		data := make([]int, 1<<10)
+		for i := 0; i < len(data); i++ {
+			data[i] = i ^ 0x2cc
+		}
+		b.StartTimer()
+		timsort.Ints(data)
+		b.StopTimer()
+	}
+}
+
 func BenchmarkInt64KStdSort(b *testing.B) {
 	b.StopTimer()
 	for i := 0; i < b.N; i++ {
@@ -163,6 +191,32 @@ func BenchmarkInt64KMergeSort(b *testing.B) {
 		}
 		b.StartTimer()
 		mergesort.Ints(data)
+		b.StopTimer()
+	}
+}
+
+func BenchmarkInt64KHeapSort(b *testing.B) {
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		data := make([]int, 1<<16)
+		for i := 0; i < len(data); i++ {
+			data[i] = i ^ 0xcccc
+		}
+		b.StartTimer()
+		heapsort.Ints(data)
+		b.StopTimer()
+	}
+}
+
+func BenchmarkInt64KTimSort(b *testing.B) {
+	b.StopTimer()
+	for i := 0; i < b.N; i++ {
+		data := make([]int, 1<<16)
+		for i := 0; i < len(data); i++ {
+			data[i] = i ^ 0xcccc
+		}
+		b.StartTimer()
+		timsort.Ints(data)
 		b.StopTimer()
 	}
 }

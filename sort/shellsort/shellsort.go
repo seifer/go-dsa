@@ -22,8 +22,10 @@ func generateGapsTokuda(l int) []int {
 		return nil
 	}
 
-	g := []int{1}
 	p := float64(1)
+	g := make([]int, 0, 8)
+
+	g = append(g, 1)
 
 	for {
 		p = 2.25*p + 1
