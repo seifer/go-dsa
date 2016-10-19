@@ -18,9 +18,9 @@ func Ints(in []int) {
 	cutrun := make([]int, 0, 2*(len(in)/minrun+1))
 
 	for i := 0; i < len(in)-1; i++ {
-		if currun == minrun {
+		if currun >= minrun {
 			cutrun = append(cutrun, i-currun)
-			cutrun = append(cutrun, minrun)
+			cutrun = append(cutrun, currun)
 			currun = 0
 			continue
 		}
