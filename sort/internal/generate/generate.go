@@ -31,12 +31,15 @@ var types = []struct {
 func main() {
 	fmt.Printf("Generate %s\n", PACKAGE)
 
+	os.Remove(fmt.Sprintf("../../%s/numeric.go", PACKAGE))
+	os.Remove(fmt.Sprintf("../../%s/numeric_test.go", PACKAGE))
+
 	write_main_file()
 	write_test_file()
 }
 
 func write_main_file() {
-	FILE := fmt.Sprintf("../../%s/numeric.go", PACKAGE)
+	FILE := fmt.Sprintf("../../%s/%s.go", PACKAGE, PACKAGE)
 
 	if err := os.Remove(FILE); err != nil {
 		if !os.IsNotExist(err) {
@@ -63,7 +66,7 @@ func write_main_file() {
 }
 
 func write_test_file() {
-	FILE := fmt.Sprintf("../../%s/numeric_test.go", PACKAGE)
+	FILE := fmt.Sprintf("../../%s/%s_test.go", PACKAGE, PACKAGE)
 
 	if err := os.Remove(FILE); err != nil {
 		if !os.IsNotExist(err) {
