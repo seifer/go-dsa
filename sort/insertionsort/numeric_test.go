@@ -1,4 +1,6 @@
-package selectionsort
+// This file should be auto generated
+
+package insertionsort
 
 import (
 	"testing"

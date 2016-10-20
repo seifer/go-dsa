@@ -1,4 +1,6 @@
-package quicksort
+// This file should be auto generated
+
+package shellsort
 
 import (
 	"testing"

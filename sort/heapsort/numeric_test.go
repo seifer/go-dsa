@@ -1,4 +1,6 @@
-package insertionsort
+// This file should be auto generated
+
+package heapsort
 
 import (
 	"testing"
@@ -8,10 +10,9 @@ import (
 
 func TestInts(t *testing.T) {
 	input := testutil.InputInts()
+	output := Ints(input)
 
-	Ints(input)
-
-	if !testutil.IsSortedInts(input) {
+	if !testutil.IsSortedInts(output) {
 		t.Fail()
 	}
 }

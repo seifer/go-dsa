@@ -1,7 +1,12 @@
-package heapsort
+//go:generate go run generate.go heapsort.go
+//go:generate goimports -w ../../heapsort/
+//go:generate gofmt -w ../../heapsort/
+package main
 
-// Ints sorting slice of ints
-func Ints(in []int) []int {
+const PACKAGE = "heapsort"
+const TEMPLATE = `
+// {{.FuncName}} sorting slice of {{.Name}}
+func {{.FuncName}}(in []{{.Name}}) []{{.Name}} {
     var left, right int
 
     // Make heap
@@ -29,7 +34,7 @@ func Ints(in []int) []int {
         }
     }
 
-    result := make([]int, len(in))
+    result := make([]{{.Name}}, len(in))
 
     for i := range in {
         result[i] = in[0]
@@ -60,3 +65,14 @@ func Ints(in []int) []int {
 
     return result
 }
+`
+const TEMPLATE_NUMERIC_TEST_FUNC = `
+func TestInts(t *testing.T) {
+    input := testutil.InputInts()
+    output := Ints(input)
+
+    if !testutil.IsSortedInts(output) {
+        t.Fail()
+    }
+}
+`
