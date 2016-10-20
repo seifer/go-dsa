@@ -1,2 +1,2 @@
 # go-dsa
-Data structs and Algorithms
+Data structures and Algorithms
